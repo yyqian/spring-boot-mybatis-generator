@@ -6,21 +6,30 @@
 	<properties resource="application.properties"/>
 	<classPathEntry location="${mbg.jdbc.driver-location}"/>
 	<context id="mysql" defaultModelType="conditional" targetRuntime="MyBatis3">
+		<property name="autoDelimitKeywords" value="false"/>
 		<property name="javaFileEncoding" value="UTF-8"/>
+		<property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+		<property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
 		<property name="beginningDelimiter" value="`"/>
 		<property name="endingDelimiter" value="`"/>
 		<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>
 		<commentGenerator>
 			<property name="suppressAllComments" value="true"/>
+			<property name="suppressDate" value="true"/>
 		</commentGenerator>
 		<jdbcConnection driverClass="${mbg.jdbc.driver-class-name}"
 						connectionURL="${mbg.jdbc.url}"
 						userId="${mbg.jdbc.username}"
 						password="${mbg.jdbc.password}">
 		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false"/>
+		</javaTypeResolver>
 		<javaModelGenerator targetProject="${mbg.target-project.java}"
 							targetPackage="${mbg.target-package.domain}">
+			<property name="constructorBased" value="false"/>
 			<property name="enableSubPackages" value="true"/>
+			<property name="immutable" value="false"/>
 			<property name="trimStrings" value="true"/>
 		</javaModelGenerator>
 		<sqlMapGenerator targetProject="${mbg.target-project.resources}"
@@ -33,8 +42,19 @@
 			<property name="enableSubPackages" value="true"/>
 		</javaClientGenerator>
 		<table tableName="user">
+			<property name="constructorBased" value="false"/>
+			<property name="ignoreQualifiersAtRuntime" value="false"/>
+			<property name="immutable" value="false"/>
+			<property name="modelOnly" value="false"/>
+			<property name="useActualColumnNames" value="false"/>
 			<columnOverride column="password_hash" javaType="java.lang.String"/>
 		</table>
-		<table tableName="post"/>
+		<table tableName="post">
+			<property name="constructorBased" value="false"/>
+			<property name="ignoreQualifiersAtRuntime" value="false"/>
+			<property name="immutable" value="false"/>
+			<property name="modelOnly" value="false"/>
+			<property name="useActualColumnNames" value="false"/>
+		</table>
 	</context>
 </generatorConfiguration>
